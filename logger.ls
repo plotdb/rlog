@@ -23,8 +23,8 @@ rl.on \line, (line) ->
   lc.out.write(line + \\n)
   console.log "[#{fs.stat-sync(lc.filename).size}] #line"
   
-  fs.readdir-sync '.'
-    .filter -> /\.log$/.exec(it)
+  fs.readdir-sync 'log'
+    .filter -> /\.log$/.exec(path.basename(it))
     .map -> "log/#it"
     .filter -> (Date.now! - +fs.stat-sync it .mtime) > (120 * 1000)
     .map (file) ->
